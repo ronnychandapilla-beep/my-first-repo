@@ -50,17 +50,18 @@
 
       async function fetchPrice(symbol, elementId) {
         try {
-          const res = await fetch(`https://api.twelvedata.com/price?symbol=${symbol}&apikey=demo`);
+          const res = await fetch(`https://financialmodelingprep.com/api/v3/quote/${symbol}?apikey=YnAV01BZii9Wufeo4nw6i8Z5cs9Z52Gv`);
           const data = await res.json();
-          document.getElementById(elementId).textContent = data.price ? `₹${data.price}` : "Unavailable";
+          const price = data[0]?.price;
+          document.getElementById(elementId).textContent = price ? `₹${price}` : "Unavailable";
         } catch (err) {
           document.getElementById(elementId).textContent = "Error";
         }
       }
 
       window.onload = function() {
-        fetchPrice("MARUTI.NS", "maruti-price");
-        fetchPrice("HDFCBANK.NS", "hdfc-price");
+        fetchPrice("MARUTI.BSE", "maruti-price");
+        fetchPrice("HDFCBANK.BSE", "hdfc-price");
       };
     </script>
   </head>
