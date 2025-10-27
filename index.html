@@ -40,6 +40,18 @@
       }
     </style>
     <script>
+      async function fetchGooglePrice(symbol, elementId) {
+        try {
+          const res = await fetch(`https://corsproxy.io/?https://www.google.com/finance/quote/${symbol}`);
+          const text = await res.text();
+          const match = text.match(/<div[^>]*class="[^"]*YMlKec[^"]*"[^>]*>(₹?[0-9,]+\.\d+)<\/div>/);
+          const price = match ? match[1] : null;
+          document.getElementById(elementId).textContent = price ? price : "Unavailable";
+        } catch (err) {
+          document.getElementById(elementId).textContent = "Error";
+        }
+      }
+
       function filterModules() {
         const selected = document.getElementById("sector").value;
         const rows = document.querySelectorAll(".ai-row");
@@ -48,19 +60,9 @@
         });
       }
 
-      async function fetchPrice(symbol, elementId) {
-        try {
-          const res = await fetch(`https://api.twelvedata.com/price?symbol=${symbol}&apikey=21a039a87c2046388c2fa14a0c96388b`);
-          const data = await res.json();
-          document.getElementById(elementId).textContent = data.price ? `₹${data.price}` : "Unavailable";
-        } catch (err) {
-          document.getElementById(elementId).textContent = "Error";
-        }
-      }
-
       window.onload = function() {
-        fetchPrice("MARUTI.NS", "maruti-price");
-        fetchPrice("HDFCBANK.NS", "hdfc-price");
+        fetchGooglePrice("MARUTI:NSE", "maruti-price");
+        fetchGooglePrice("HDFCBANK:NSE", "hdfc-price");
       };
     </script>
   </head>
