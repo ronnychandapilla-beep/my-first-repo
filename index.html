@@ -39,12 +39,33 @@
         background-color: #f0f0f0;
       }
     </style>
+    <script>
+      function filterModules() {
+        const selected = document.getElementById("sector").value;
+        const rows = document.querySelectorAll(".ai-row");
+        rows.forEach(row => {
+          row.style.display = (selected === "all" || row.classList.contains(selected)) ? "" : "none";
+        });
+      }
+    </script>
   </head>
   <body>
     <header>
       <h1>Ronny's Agentic Dashboard</h1>
       <p>Cycle-aware, modular, and built for clarity</p>
     </header>
+
+    <div class="module">
+      <h2>📊 Filter Modules</h2>
+      <label for="sector">Select Sector:</label>
+      <select id="sector" onchange="filterModules()">
+        <option value="all">All</option>
+        <option value="autos">Autos</option>
+        <option value="commodities">Commodities</option>
+        <option value="nbfcs">NBFCs/Banks</option>
+        <option value="hotels">Hotels</option>
+      </select>
+    </div>
 
     <div class="module">
       <h2>📈 Watchlist</h2>
@@ -79,25 +100,25 @@
           <th>Cycle Context</th>
           <th>Signal</th>
         </tr>
-        <tr>
+        <tr class="ai-row commodities">
           <td>Commodities</td>
           <td>Track global supply/demand, inventory levels, and price triggers</td>
           <td>Early-cycle, inflation-sensitive</td>
           <td>🟢 Rising input costs, bullish copper</td>
         </tr>
-        <tr>
+        <tr class="ai-row autos">
           <td>Autos</td>
           <td>Monitor EV adoption, rural demand, and export trends</td>
           <td>Mid-cycle, margin expansion</td>
           <td>🟡 Maruti gaining share, Tata EV push</td>
         </tr>
-        <tr>
+        <tr class="ai-row nbfcs">
           <td>NBFCs/Banks</td>
           <td>Analyze NIM trends, credit growth, and regulatory shifts</td>
           <td>Late-cycle, rate-sensitive</td>
           <td>🔴 NIM compression, rising NPAs</td>
         </tr>
-        <tr>
+        <tr class="ai-row hotels">
           <td>Hotels</td>
           <td>Track occupancy, ARR, and seasonal demand</td>
           <td>Mid-cycle, discretionary rebound</td>
