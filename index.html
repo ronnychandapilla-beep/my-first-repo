@@ -25,6 +25,19 @@
       h2 {
         margin-top: 0;
       }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 0.5rem;
+      }
+      th, td {
+        border: 1px solid #ddd;
+        padding: 0.5rem;
+        text-align: left;
+      }
+      th {
+        background-color: #f0f0f0;
+      }
     </style>
   </head>
   <body>
@@ -35,7 +48,26 @@
 
     <div class="module">
       <h2>📈 Watchlist</h2>
-      <p>Track your top stocks with segmental insights and cycle context.</p>
+      <table>
+        <tr>
+          <th>Stock</th>
+          <th>Segmental Revenue</th>
+          <th>Ownership</th>
+          <th>Cycle Signal</th>
+        </tr>
+        <tr>
+          <td>Maruti Suzuki</td>
+          <td>Passenger Vehicles: 85%<br>Exports: 10%</td>
+          <td>Suzuki Motor Corp: 56%</td>
+          <td>🔁 Mid-cycle, rising margins</td>
+        </tr>
+        <tr>
+          <td>HDFC Bank</td>
+          <td>Retail Loans: 60%<br>Corporate: 30%</td>
+          <td>Public: 100%</td>
+          <td>📉 Late-cycle, NIM pressure</td>
+        </tr>
+      </table>
     </div>
 
     <div class="module">
