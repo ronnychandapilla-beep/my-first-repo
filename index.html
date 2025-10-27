@@ -50,7 +50,7 @@
 
       async function fetchPrice(symbol, elementId) {
         try {
-          const res = await fetch(`https://financialmodelingprep.com/api/v3/quote/${symbol}?apikey=YnAV01BZii9Wufeo4nw6i8Z5cs9Z52Gv`);
+          const res = await fetch(`https://financialmodelingprep.com/api/v3/quote-short/${symbol}?apikey=YnAV01BZii9Wufeo4nw6i8Z5cs9Z52Gv`);
           const data = await res.json();
           const price = data[0]?.price;
           document.getElementById(elementId).textContent = price ? `₹${price}` : "Unavailable";
