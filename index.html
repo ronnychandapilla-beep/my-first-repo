@@ -47,6 +47,21 @@
           row.style.display = (selected === "all" || row.classList.contains(selected)) ? "" : "none";
         });
       }
+
+      async function fetchPrice(symbol, elementId) {
+        try {
+          const res = await fetch(`https://api.twelvedata.com/price?symbol=${symbol}&apikey=demo`);
+          const data = await res.json();
+          document.getElementById(elementId).textContent = data.price ? `₹${data.price}` : "Unavailable";
+        } catch (err) {
+          document.getElementById(elementId).textContent = "Error";
+        }
+      }
+
+      window.onload = function() {
+        fetchPrice("MARUTI.NS", "maruti-price");
+        fetchPrice("HDFCBANK.NS", "hdfc-price");
+      };
     </script>
   </head>
   <body>
@@ -80,13 +95,13 @@
           <td>Maruti Suzuki</td>
           <td>Passenger Vehicles: 85%<br>Exports: 10%</td>
           <td>Suzuki Motor Corp: 56%</td>
-          <td>🔁 Mid-cycle, rising margins</td>
+          <td>🔁 Mid-cycle, rising margins<br><strong>Live Price:</strong> <span id="maruti-price">Loading...</span></td>
         </tr>
         <tr>
           <td>HDFC Bank</td>
           <td>Retail Loans: 60%<br>Corporate: 30%</td>
           <td>Public: 100%</td>
-          <td>📉 Late-cycle, NIM pressure</td>
+          <td>📉 Late-cycle, NIM pressure<br><strong>Live Price:</strong> <span id="hdfc-price">Loading...</span></td>
         </tr>
       </table>
     </div>
